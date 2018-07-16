@@ -1,7 +1,7 @@
 ---
 - hosts:all
   remote_user: jhadmin
-  task:
+  tasks:
   - name:ping test gogo
     ping:
     become:yes
