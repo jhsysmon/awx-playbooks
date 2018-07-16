@@ -1,0 +1,8 @@
+---
+- hosts:all
+  remote_user: kenshin
+  task:
+  - name:ping test gogo
+    ping:
+    become:yes
+    become_user:root
