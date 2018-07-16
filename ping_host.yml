@@ -1,6 +1,6 @@
 ---
 - hosts:all
-  remote_user: kenshin
+  remote_user: jhadmin
   task:
   - name:ping test gogo
     ping:
