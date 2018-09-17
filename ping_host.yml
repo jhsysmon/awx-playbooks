@@ -1,9 +1,9 @@
 ---
 - hosts: all
-  remote_user: jhadmin
+  remote_user: jinhak\ens
   ##gather_facts: false
   tasks:
   - name: ping test gogo
     ping:
     become: yes
-    become_user: jhadmin
+    become_user: jinhak\ens
