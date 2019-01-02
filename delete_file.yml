@@ -1,0 +1,32 @@
+---
+#- hosts: all
+- hosts: all:!172.20.1.151 # exclude appweb1
+  gather_facts: no
+  remote_user: ansible
+
+  tasks:
+  - name: Remove File
+    win_file: 
+#     path: c:/appweb1.txt
+     path: c:/foo.txt
+     state: absent
+    vars:
+     ansible_become: false
+     ansible_connection: winrm
+     ansible_port: 5985
+     ansible_winrm_scheme: http
+     ansible_winrm_server_cert_validation: ignore
+
+- hosts: localhost
+  gather_facts: no
+  remote_user: jhadmin
+
+  tasks:
+  - name: send a message to chat in playbook
+    telegram:
+     token: '669066807:AAFWmAM2D0j9tOyCGWC-tPuvCx7bo88HFvE'
+     chat_id: 29591921
+     msg: "문제해결 : SC4020-2 has just been restarted\n장애시간 :  2019.01.01 19:01:05"
+#    vars:
+#     ansible_port: 22
+#     ansible_connection: ssh

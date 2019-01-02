@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: no
+  remote_user: jhadmin
+
+  tasks:
+  - name: send a message to chat in playbook
+    telegram:
+     token: '669066807:AAFWmAM2D0j9tOyCGWC-tPuvCx7bo88HFvE'
+     chat_id: 29591921
+     msg: "문제해결 : SC4020-2 has just been restarted\n장애시간 :  2019.01.01 19:01:05"
+#    vars:
+#     ansible_port: 22
+#     ansible_connection: ssh
+

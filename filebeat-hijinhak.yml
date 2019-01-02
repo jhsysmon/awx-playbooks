@@ -1,0 +1,40 @@
+#=========================== Filebeat inputs =============================
+filebeat.inputs:
+- type: log
+  enabled: true
+  encoding: utf-8
+  exclude_lines: ['.(js|css|xml|swf|png|jpg|gif|ico|woff|axd)']
+
+  paths:
+    #- /var/log/*.log
+    - C:\WebLog\hijinhak.jinhak.com\*\*
+  #ignore_older: 1m
+  fields:
+    type: iis
+
+#============================= Filebeat modules ===============================
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: false
+
+#==================== Elasticsearch template setting ==========================
+setup.template.settings:
+#  index.number_of_shards: 3
+  #index.codec: best_compression
+  #_source.enabled: false
+
+#================================ General =====================================
+tags: ["iis", "iis-hijinhak"]
+
+#============================== Kibana =====================================
+setup.kibana:
+#  host: "172.20.7.196:80"
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+  hosts: ["172.20.7.128:50443", "192.168.55.236:50443", "192.168.55.237:50443"]
+  loadbalance: true

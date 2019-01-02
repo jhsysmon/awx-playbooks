@@ -1,0 +1,37 @@
+---
+#- hosts: all
+- hosts: 172.20.1.151 #included inventory hosts
+  gather_facts: no
+  remote_user: ansible
+
+  tasks:
+  - name: file copy from appweb1
+    fetch:
+      src: c:/filebeat/filebeat.yml
+      dest: ./appweb1.txt
+      flat: true
+#    become: yes
+#    become_user: root
+
+
+
+- hosts: all:!172.20.1.151 # exclude appweb1 
+  gather_facts: no
+  remote_user: ansible
+
+  tasks:
+  - name: Copy files to windows hosts
+    win_copy:
+      src: ./appweb1.txt
+      dest: c:/appweb1.txt # Destination Server Direcctory
+      force: yes
+
+# Linux hosts
+
+#  - name: Copy files to linux hosts
+#    copy:
+#      src: ./appweb1.txt
+#      dest: /etc/logstash/conf.d/appweb1.txt
+#      mode: 0644
+#    become: yes
+#    become_user: root

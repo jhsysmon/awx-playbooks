@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: ansible
+
+  tasks:
+   - name: Modify filebeat.yml
+     win_lineinfile:
+      path: C:\filebeat\filebeat.yml
+      line: '  loadbalance: true'
+      newline: windows
+      state: present
+
+   - name: Restart a filebeat service
+     win_service:
+      name: filebeat
+      state: restarted

@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: ansible
+
+  tasks:
+  - name: Remove File
+    win_command: 'net use \\172.20.7.246 /user:ansible A!1234567'
+
+  - name: Remove File
+    win_command: 'net use t: \\172.20.7.246\Zabbix_Agent_Win'
+
+  - name: Remove File
+    win_command: 'copy /Y t:\filebeat.yml c:\filebeat\filebeat.yml'
+
+  - name: Remove File
+    win_command: 'net use t: /delete'

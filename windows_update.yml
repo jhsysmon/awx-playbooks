@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Install all security updates
+      win_updates:
+        category_names:
+        - SecurityUpdates
+        - DefinitionUpdates
+        - CriticalUpdates
+        - UpdateRollups
+        - Updates
+#        state: searched
+        reboot: "{{ reboot }}"
+      register: update_rst
+
+    - name: Print result
+      debug:
+        var: update_rst

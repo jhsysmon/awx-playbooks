@@ -1,0 +1,23 @@
+---
+- hosts: all
+  gather_facts: no
+  remote_user: ansible
+
+  tasks:
+  - name: Copy AWX Server filebeat-hijinhak.yml to HWeb
+    win_copy:
+      src: /var/lib/awx/projects/Windows_Test/filebeat-hijinhak.yml  # Ansible AWX Server Directory, SAME Project Directory
+      dest: c:\filebeat\filebeat.yml  # Destination Server Direcctory
+      force: yes
+#      remote_src: yes
+#    become: yes
+#    become_method: runas
+#    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+#    vars:
+#      ansible_become_user: ansible
+#      ansible_become_pass: A!1234567
+
+  - name: Restart a filebeat service
+    win_service:
+     name: filebeat
+     state: restarted
